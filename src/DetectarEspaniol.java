@@ -1,17 +1,20 @@
 package net.codejava.io;
 
+import java.util.HashSet;
+
 public class DetectarEspaniol {
-    char ESPACIO = ' ';
+
     boolean isSpanish (String lineaTest, int clave)  {
         // detecta presencia de idioma español sin utilizar palabras
-        // ACLARACION: esto funciona bien, desencripta textos con claves bajas y
-        // altas, gracias a que hay muchos caracteres que no son alfabeticos
+        // esto funciona bien gracias a que hay muchos caracteres que no son alfabeticos
+        char ESPACIO = ' ';
+        HashSet <Character> finDePalabra = new HashSet<Character>();
+        finDePalabra.add('a'); finDePalabra.add('o'); finDePalabra.add('s');
+        finDePalabra.add('.');  // caso particular de fin de palabra que tambien puede ser fin de linea
         for (int i=0; i<lineaTest.length()-1; i++)
             // el -1 es porque no voy a testear el ultimo caracter
             if (lineaTest.charAt(i+1) == ESPACIO)  {
-                if (lineaTest.charAt(i)=='a' || lineaTest.charAt(i) =='o'
-                        || lineaTest.charAt(i) =='s' || lineaTest.charAt(i) =='.')
-                    // PUEDE METERSE ESO EN UN HASHSET
+                if (finDePalabra.contains(lineaTest.charAt(i)))
                     // vale para otros idiomas que pongan espacio luego de esas letras
                     // es decir, ante final de palabra junto a espacio, se da por encontrado
                     return true;
