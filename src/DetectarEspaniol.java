@@ -8,7 +8,7 @@ public class DetectarEspaniol {
         // detecta presencia de idioma español sin utilizar palabras
         // esto funciona bien gracias a que hay muchos caracteres que no son alfabeticos
         char ESPACIO = ' ';
-        HashSet <Character> finDePalabra = new HashSet<Character>();
+        HashSet <Character> finDePalabra = new HashSet<>();
         finDePalabra.add('a'); finDePalabra.add('o'); finDePalabra.add('s');
         finDePalabra.add('.');  // caso particular de fin de palabra que tambien puede ser fin de linea
         for (int i=0; i<lineaTest.length()-1; i++)
