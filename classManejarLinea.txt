@@ -1,0 +1,21 @@
+package net.codejava.io;
+
+// en esta clase se dirige la linea a modificarla según lo solicitado
+public class ManejarLinea {
+
+    String encriptar(String linea, int clave) {
+        ModificarLinea modificarLinea = new ModificarLinea();
+        return modificarLinea.sustituirLinea(linea, clave);
+    }
+
+    String desencriptar(String linea, int clave) {
+        clave = MutarEncripteADesencripte(clave);
+        ModificarLinea modificarLinea = new ModificarLinea();
+        return modificarLinea.sustituirLinea(linea, clave);
+    }
+
+    private static int MutarEncripteADesencripte(int clave) {
+        clave *= -1;
+        return clave;
+    }
+}  //  end class
