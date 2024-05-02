@@ -77,21 +77,26 @@ public class Solution {
                     linea = manejarLinea.desencriptar(linea,clave);
                 }  //  if desencriptar
                 else if (nroElegido == FUERZABRUTA)  {
-                    // si es la primer linea del archvivo, aplicar fuerza bruta
-                    // esto porque se volveria lento y complejo testear varias lineas
-                    // inconveniente: si es una linea corta tendrá dificultad.
+                    // si es la primer linea del archivo, escudriñarla
+                    // solo esa linea porque se volveria lento y complejo testear varias lineas
+                    // inconveniente: si es una linea corta tendrá dificultad. Habría que agregar:
+                   //     if (linea.length() > POCAS_LETRAS)  donde POCAS_LETRAS = 20 o 30 aproximadamente
+                   //  es decir habría que considerar que la primera linea puede ser una sola palabra,
+                   //  por ejemplo un titulo. Entonces no funcionará, y la solucion es volver a leer otra linea
+                   //  y esa segunda linea debe quedar unida a la primera en una sola linea. Esa rutina queda
+                   //  para implementar a futuro.
                     if (clave == 0)  // en clave 0 escudriño el texto
-                   //     if (linea.length() > POCAS_LETRAS)
                         {
                           Desencripte desencripte = new Desencripte();
                           clave = desencripte.fuerzaBruta(linea);  // encuentra clave escondida
                         } // if
-                    // FuerzaBruta se llamó una sola vez
+                    // la class FuerzaBruta se llama una sola vez
+                    // en el resto del archivo desencripto con la clave ya encontrada:
                     if (clave != RANGO_EXCEDIDO)  {
                         ManejarLinea manejarLinea = new ManejarLinea();
                         linea = manejarLinea.desencriptar(linea,clave);
                         } // if not rango excedido
-                    // con la clave encontrada se muestra todo el archivo debido al while
+                    // con la clave encontrada se procesa todo el archivo debido al while
                 } // if fuerza bruta
                 /*  LA OPCION ANALISIS FALTA AJUSTARLA
                 else if (nroElegido == ANALISIS)
