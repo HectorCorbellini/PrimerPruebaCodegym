@@ -13,13 +13,14 @@ public class Desencripte {
     int fuerzaBruta (String linea)  {
         // aplica Cesar cambiando las claves hasta que se vuelva español
         int claveBruta = 0;
-        String lineaEnEspaniol = null;
+        boolean esEspaniol = false;
+        ManejarLinea manejarLinea = new ManejarLinea();
+        DetectarEspaniol detectarEspaniol = new DetectarEspaniol();
         // ahora recorro la linea cambiando hasta rangoClaves veces las posiciones de letras
-        while ( (lineaEnEspaniol == null) && claveBruta <= rangoClaves)  {
+        while ( ! esEspaniol && claveBruta <= rangoClaves)  {
             claveBruta++;
-            DetectarEspaniol detectarEspaniol = new DetectarEspaniol();
-            lineaEnEspaniol = detectarEspaniol.checkSpanish(linea,claveBruta);
-            //  CORREGIR ESTO, USAR UN BOOLEAN
+            linea = manejarLinea.desencriptar(linea,claveBruta);
+            esEspaniol = detectarEspaniol.isSpanish(linea,claveBruta);
         }  // end while
         if (claveBruta > rangoClaves) return RANGO_EXCEDIDO;
         else return claveBruta;
@@ -51,7 +52,8 @@ public class Desencripte {
                 // a continuación confirma que esa línea está en español
                 ManejarLineas manejarLineas = new ManejarLineas();
                 linea = manejarLineas.desencriptar(linea,claveDescubierta);
-                if (CheckSpanish (linea,claveDescubierta) !=null)
+
+                if (isSpanish (linea,claveDescubierta))
                     //  OJO ESTA EN BOOLEAN
                     return claveDescubierta;
             }  // if

@@ -29,7 +29,7 @@ public class Solution {
     // las constantes minCharNum y maxCharNum, debe cuidarse que quede incluido el alfabeto
     public static final int RANGO_EXCEDIDO = -1;
     //constante para indicar que el recorrido del rango terminó
-    public static final int POCAS_LETRAS = 30;
+    public static final int POCAS_LETRAS = 20;
     public static final byte ENCRIPTAR = 1;
     public static final byte DESENCRIPTAR = 2;
     public static final byte FUERZABRUTA = 3;
@@ -63,34 +63,33 @@ public class Solution {
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
             int clave = 0;  // la clave que se usará para trabajar el texto
-            String linea;  // sobre esta linea string se hará casi toda la tarea
-            // aqui comienza lectura linea por linea del archivo
+            String linea = null;  // sobre esta linea string se hará casi toda la tarea
             if (nroElegido == ENCRIPTAR || nroElegido == DESENCRIPTAR)
                 clave = RecibirClave();  // recibe la clave de encriptacion
+            // aqui comienza lectura linea por linea del archivo
             while ((linea = bufferedReader.readLine()) != null) {
                 if (nroElegido == ENCRIPTAR)  {
-                    ManejarLinea manejarLineas = new ManejarLinea();
-                    linea = manejarLineas.encriptar(linea,clave);
+                    ManejarLinea manejarLinea = new ManejarLinea();
+                    linea = manejarLinea.encriptar(linea,clave);
                     }  //  if encriptar
                 else if (nroElegido == DESENCRIPTAR)  {
-                    ManejarLinea manejarLineas = new ManejarLinea();
-                    linea = manejarLineas.desencriptar(linea,clave);
+                    ManejarLinea manejarLinea = new ManejarLinea();
+                    linea = manejarLinea.desencriptar(linea,clave);
                 }  //  if desencriptar
                 else if (nroElegido == FUERZABRUTA)  {
                     // si es la primer linea del archvivo, aplicar fuerza bruta
                     // esto porque se volveria lento y complejo testear varias lineas
                     // inconveniente: si es una linea corta tendrá dificultad.
-                    if (clave == 0)  // si la clave no fue usada, es decir sólo leerá una linea
-                        if (linea.length() > POCAS_LETRAS)
-                        { // es para que no use esa linea si pocas son letras, use la siquiente
+                    if (clave == 0)  // en clave 0 escudriño el texto
+                   //     if (linea.length() > POCAS_LETRAS)
+                        {
                           Desencripte desencripte = new Desencripte();
                           clave = desencripte.fuerzaBruta(linea);  // encuentra clave escondida
                         } // if
-                    // AplicarFuerzaBruta devolverá -1 si no lo logró, para no
-                    // llamar más de una vez a esa rutina, porque se volveria largo
+                    // FuerzaBruta se llamó una sola vez
                     if (clave != RANGO_EXCEDIDO)  {
-                        ManejarLinea manejarLineas = new ManejarLinea();
-                        linea = manejarLineas.desencriptar(linea,clave);
+                        ManejarLinea manejarLinea = new ManejarLinea();
+                        linea = manejarLinea.desencriptar(linea,clave);
                         } // if not rango excedido
                     // con la clave encontrada se muestra todo el archivo debido al while
                 } // if fuerza bruta
