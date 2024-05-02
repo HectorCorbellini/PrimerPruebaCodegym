@@ -3,12 +3,12 @@ package net.codejava.io;
 // en esta clase se desencripta una linea
 
 public class Desencripte {
-    // CUIDADO!! VUELVO A PONER LAS MISMAS CONSTANTES PORQUE LA CLASE NO LAS RECONOCE
-    public static final int RANGO_EXCEDIDO = -1;
-    public static final int minCharNum = 10;  // primera letra del rango ascii utilizado
-    public static final int maxCharNum = 254;  // incluye el abecedario en inglés y español
+    // VUELVO A PONER LAS MISMAS CONSTANTES PORQUE LA CLASE NO LAS RECONOCE
+    public static final int RANGO_EXCEDIDO = Solution.RANGO_EXCEDIDO;
+    public static final int minCharNum = Solution.minCharNum;  // primera letra del rango ascii utilizado
+    public static final int maxCharNum = Solution.maxCharNum;  // incluye el abecedario en inglés y español
     // en la tabla ascii hay 256 caracteres. Se puede hacer variar minCharNum y maxCharNum
-    public static final int rangoClaves = maxCharNum - minCharNum;
+    public static final int rangoClaves = Solution.rangoClaves;
 
     int fuerzaBruta (String linea)  {
         // aplica Cesar cambiando las claves hasta que se vuelva español
