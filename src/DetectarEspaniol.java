@@ -11,6 +11,10 @@ public class DetectarEspaniol {
         HashSet <Character> finDePalabra = new HashSet<>();
         finDePalabra.add('a'); finDePalabra.add('o'); finDePalabra.add('s');
         finDePalabra.add('.');  // caso particular de fin de palabra que tambien puede ser fin de linea
+
+        ManejarLinea manejarLinea = new ManejarLinea();
+        lineaTest = manejarLinea.desencriptar(lineaTest,clave);
+
         for (int i=0; i<lineaTest.length()-1; i++)
             // el -1 es porque no voy a testear el ultimo caracter
             if (lineaTest.charAt(i+1) == ESPACIO)  {

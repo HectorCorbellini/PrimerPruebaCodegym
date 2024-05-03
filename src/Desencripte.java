@@ -14,12 +14,12 @@ public class Desencripte {
         // aplica Cesar cambiando las claves hasta que se vuelva español
         int claveBruta = 0;
         boolean esEspaniol = false;
-        ManejarLinea manejarLinea = new ManejarLinea();
+
         DetectarEspaniol detectarEspaniol = new DetectarEspaniol();
         // ahora recorro la linea cambiando hasta rangoClaves veces las posiciones de letras
         while ( ! esEspaniol && claveBruta <= rangoClaves)  {
             claveBruta++;
-            linea = manejarLinea.desencriptar(linea,claveBruta);
+
             esEspaniol = detectarEspaniol.isSpanish(linea,claveBruta);
         }  // end while
         if (claveBruta > rangoClaves) return RANGO_EXCEDIDO;
