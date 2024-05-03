@@ -1,6 +1,7 @@
 package net.codejava.io;
 
-/*
+/* CUIDADO:
+ESTE NO ES EL CÓDIGO QUE YO ENTREGUÉ EN LA PRUEBA. ESTE ES SOLAMENTE UN BORRADOR
  * Este programa encripta un archivo de formato .txt en cifrado Cesar
  * lo cual hace linea por linea y luego puede desencriptarlo por varios métodos
  * @author Hector Corbellini
