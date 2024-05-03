@@ -14,6 +14,8 @@ public class DetectarEspaniol {
 
         ManejarLinea manejarLinea = new ManejarLinea();
         lineaTest = manejarLinea.desencriptar(lineaTest,clave);
+        // IMPORTANTE: para que isSpanish tuviera responsabilidad única, intenté llevar estas dos
+        // líneas a la clase Desencripte. Pero al hacerlo dejó de funcionar, da RuntimeException
 
         for (int i=0; i<lineaTest.length()-1; i++)
             // el -1 es porque no voy a testear el ultimo caracter
