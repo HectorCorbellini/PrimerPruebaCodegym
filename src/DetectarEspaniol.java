@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class DetectarEspaniol {
 
-    boolean isSpanish (String lineaTest, int clave)  {
+    boolean isSpanish (String lineaTest)  {
         // detecta presencia de idioma español sin utilizar palabras
         // esto funciona bien gracias a que hay muchos caracteres que no son alfabeticos
         char ESPACIO = ' ';

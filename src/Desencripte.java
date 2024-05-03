@@ -20,7 +20,7 @@ public class Desencripte {
         while ( ! esEspaniol && claveBruta <= rangoClaves)  {
             claveBruta++;
             linea = manejarLinea.desencriptar(linea,claveBruta);
-            esEspaniol = detectarEspaniol.isSpanish(linea,claveBruta);
+            esEspaniol = detectarEspaniol.isSpanish(linea);
         }  // end while
         if (claveBruta > rangoClaves) return RANGO_EXCEDIDO;
         else return claveBruta;
@@ -53,7 +53,7 @@ public class Desencripte {
                 ManejarLineas manejarLineas = new ManejarLineas();
                 linea = manejarLineas.desencriptar(linea,claveDescubierta);
 
-                if (isSpanish (linea,claveDescubierta))
+                if (isSpanish (linea))
                     //  OJO ESTA EN BOOLEAN
                     return claveDescubierta;
             }  // if
