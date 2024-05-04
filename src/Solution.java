@@ -35,8 +35,8 @@ public class Solution {
     public static final byte FUERZABRUTA = 3;
     public static final byte ANALISIS = 4;
     public static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
+
         System.out.println ("Bienvenido a encriptacion de archivos. Elija procedimiento:");
         System.out.println ("digite "+ENCRIPTAR+" - para encriptar su archivo");
         System.out.println ("digite "+DESENCRIPTAR+" - para desencriptar su archivo");
@@ -54,12 +54,17 @@ public class Solution {
 
     public static void ManejarArchivos(byte nroElegido) {
         // aqui se cuidan las IOexcepciones en archivos
-        //   posibilidad: System.out.println ("Ingrese ruta del archivo:");
-        //                String ruta = scanner.nextLine();
+        Scanner lectura = new Scanner(System.in);
+        System.out.println("Ingrese ruta y archivo (Enter para ruta por defecto): ");
+        String rutaEntrada = lectura.nextLine();
+        if (rutaEntrada == "")  rutaEntrada = "/home/uko/Documentos/prueba.txt";  // ruta por defecto
+        System.out.println("Ingrese ruta y archivo donde estará el resultado (Enter para ruta por defecto): ");
+        String rutaSalida = lectura.nextLine();
+        if (rutaSalida == "")  rutaSalida = "/home/uko/Documentos/resultado.txt";  // ruta por defecto
         try {
-            FileReader reader = new FileReader("/home/uko/Documentos/prueba.txt");
+            FileReader reader = new FileReader(rutaEntrada);
             BufferedReader bufferedReader = new BufferedReader(reader);
-            FileWriter writer = new FileWriter("/home/uko/Documentos/resultado.txt", true);
+            FileWriter writer = new FileWriter(rutaSalida, true);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
             int clave = 0;  // la clave que se usará para trabajar el texto
@@ -77,8 +82,8 @@ public class Solution {
                     linea = manejarLinea.desencriptar(linea,clave);
                 }  //  if desencriptar
                 else if (nroElegido == FUERZABRUTA)  {
-                    // si es la primer linea del archivo, escudriñarla
-                    // solo esa linea porque se volveria lento y complejo testear varias lineas
+                    // si es la primer linea del archivo, escudriñarla.
+                    // Solo esa linea porque se volveria lento y complejo testear varias lineas.
                     // inconveniente: si es una linea corta tendrá dificultad. Habría que agregar:
                    //     if (linea.length() > POCAS_LETRAS)  donde POCAS_LETRAS = 20 o 30 aproximadamente
                    //  es decir habría que considerar que la primera linea puede ser una sola palabra,

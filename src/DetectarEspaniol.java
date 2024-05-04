@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class DetectarEspaniol {
 
-    boolean isSpanish (String lineaTest)  {
+    boolean isSpanish (String lineaTest,int clave)  {
         // detecta presencia de idioma español sin utilizar palabras
         // esto funciona bien gracias a que hay muchos caracteres que no son alfabeticos
         char ESPACIO = ' ';
@@ -16,6 +16,7 @@ public class DetectarEspaniol {
         lineaTest = manejarLinea.desencriptar(lineaTest,clave);
         // IMPORTANTE: para que isSpanish tuviera responsabilidad única, intenté llevar estas dos
         // líneas a la clase Desencripte. Pero al hacerlo dejó de funcionar, da RuntimeException
+        // busqué las posibles causas pero no hallé ninguna hasta ahora
 
         for (int i=0; i<lineaTest.length()-1; i++)
             // el -1 es porque no voy a testear el ultimo caracter
