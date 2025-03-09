@@ -6,7 +6,7 @@ Una herramienta de línea de comandos basada en Java para encriptar y desencript
 
 **URL del Repositorio**: https://github.com/HectorCorbellini/PrimerPruebaCodegym
 
-*Nota: El token de acceso se encuentra almacenado de forma segura localmente.*
+*Nota: No necesitas buscar ni configurar ningún token de acceso. El token ya está incluido de forma segura en el código y funciona automáticamente.*
 
 ## Características
 
