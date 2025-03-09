@@ -3,26 +3,41 @@ package com.example.cryptography;
 public class Cesar {
     private char letraModificada;
 
-    public Cesar (char letra,int clave) {
-        if (letra >= Ajustes.minCharNum && letra <= Ajustes.maxCharNum)
-            letraModificada = recorrer(letra,clave);
-        else System.out.println("letra inválida");
-    } // constructor
+    Cesar(char letra, int clave) {
+        // Convert character to its code point
+        int codePoint = (int)letra;
+        
+        // If it's a control character (0-31), keep it unchanged
+        if (codePoint < Ajustes.minCharNum) {
+            letraModificada = letra;
+            return;
+        }
+        
+        // If it's within the Basic Multilingual Plane, apply the cipher
+        if (codePoint <= Ajustes.maxCharNum) {
+            letraModificada = recorrer(letra, clave);
+        } else {
+            // For characters outside BMP, keep them unchanged
+            letraModificada = letra;
+        }
+    }
 
-    public char getLetra() {
+    char getLetra() {
         return letraModificada;
-    } // get
+    }
 
-    private char recorrer(char letra,int clave)  {
-        // corro clave lugares el codigo de la letra a encriptar
+    char recorrer(char letra, int clave) {
         int codigoLetraModificada = (int)letra + clave;
-        if (codigoLetraModificada > Ajustes.maxCharNum)  // rango excedido hacia adelante
-            // entonces sumo al comienzo del rango
-            codigoLetraModificada = Ajustes.minCharNum + (codigoLetraModificada - Ajustes.maxCharNum);
-        else if (codigoLetraModificada < Ajustes.minCharNum)   // rango excedido hacia ajtras
-            // entonces resto desde el final del rango
-            codigoLetraModificada = Ajustes.maxCharNum - (Ajustes.minCharNum - codigoLetraModificada);
+        
+        // Handle wrapping within the valid range
+        if (codigoLetraModificada > Ajustes.maxCharNum) {
+            int exceso = codigoLetraModificada - Ajustes.maxCharNum;
+            codigoLetraModificada = Ajustes.minCharNum + (exceso - 1);
+        } else if (codigoLetraModificada < Ajustes.minCharNum) {
+            int defecto = Ajustes.minCharNum - codigoLetraModificada;
+            codigoLetraModificada = Ajustes.maxCharNum - (defecto - 1);
+        }
+        
         return (char)codigoLetraModificada;
-    } // method
-
-} // class
+    }
+}

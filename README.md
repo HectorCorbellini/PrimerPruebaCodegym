@@ -17,6 +17,7 @@ Una herramienta de línea de comandos basada en Java para encriptar y desencript
 - **Detección de Idioma**: Detecta automáticamente si el texto desencriptado es legible (Español/Inglés)
 - **Interfaz Gráfica**: Nueva interfaz de usuario para una experiencia más amigable
 - **Vista Previa**: Muestra las primeras 5 líneas del texto procesado
+- **Soporte UTF-8**: Manejo completo de caracteres UTF-8, incluyendo caracteres especiales del español y otros símbolos
 
 ## Estructura del Proyecto
 
@@ -127,12 +128,14 @@ Para verificar que el programa funciona correctamente:
    - Debe identificar la clave mediante análisis de frecuencia
    - El texto resultante debe ser legible
 
-## Limitaciones
+## Notas Importantes
 
 - El cifrado César es un método de encriptación básico y no debe usarse para datos sensibles
 - El análisis criptográfico funciona mejor con textos más largos
 - La detección de idioma está optimizada para textos en español e inglés
-- El valor máximo de la clave de encriptación es 255
+- El valor máximo de la clave de encriptación es 65535 (soporte completo para caracteres Unicode BMP)
+- Los caracteres fuera del rango Unicode BMP se mantienen sin cambios durante la encriptación
+- Los caracteres de control (código < 32) se preservan durante la encriptación
 
 ## Contribuir
 
