@@ -15,6 +15,8 @@ Una herramienta de línea de comandos basada en Java para encriptar y desencript
 - **Ataque por Fuerza Bruta**: Prueba automáticamente diferentes claves para desencriptar un archivo
 - **Análisis Criptográfico**: Intenta desencriptar un archivo usando análisis de frecuencia
 - **Detección de Idioma**: Detecta automáticamente si el texto desencriptado es legible (Español/Inglés)
+- **Interfaz Gráfica**: Nueva interfaz de usuario para una experiencia más amigable
+- **Vista Previa**: Muestra las primeras 5 líneas del texto procesado
 
 ## Estructura del Proyecto
 
@@ -24,18 +26,23 @@ encrip/
 │   └── com/
 │       └── example/
 │           └── cryptography/
-│               ├── Ajustes.java      # Configuraciones y constantes
-│               ├── Archivo.java      # Operaciones con archivos
-│               ├── Cesar.java        # Implementación del cifrado César
-│               ├── Consola.java      # Interfaz de consola
+│               ├── Ajustes.java        # Configuraciones y constantes
+│               ├── Archivo.java        # Operaciones con archivos
+│               ├── Cesar.java          # Implementación del cifrado César
+│               ├── Consola.java        # Interfaz de consola
 │               ├── AnalisisCripto.java # Análisis criptográfico
-│               ├── Desencripte.java  # Operaciones de desencriptación
-│               ├── Espaniol.java     # Detección de idioma
-│               ├── Principal.java    # Entrada principal del programa
-│               ├── Recorrer.java     # Procesamiento de texto
-│               └── EjecutorPruebas.java # Suite de pruebas
-├── bin/                             # Archivos compilados
-└── README.md                        # Este archivo
+│               ├── Desencripte.java    # Operaciones de desencriptación
+│               ├── Espaniol.java       # Detección de idioma
+│               ├── Principal.java      # Entrada principal del programa
+│               ├── Recorrer.java       # Procesamiento de texto
+│               ├── InterfazGrafica.java # Nueva interfaz gráfica
+│               ├── EjecutorPruebas.java # Suite de pruebas
+│               └── servicio/           # Capa de servicios
+│                   ├── ServicioCifrado.java
+│                   ├── TipoOperacion.java
+│                   └── ResultadoProcesamiento.java
+├── bin/                               # Archivos compilados
+└── README.md                          # Este archivo
 ```
 
 ## Requisitos
@@ -52,75 +59,73 @@ encrip/
 
 2. Compilar los archivos fuente:
    ```bash
-   javac -d bin src/com/example/cryptography/*.java
+   find src/com/example/cryptography/ -name "*.java" -exec javac -d bin {} +
    ```
 
-## Uso
+## Pruebas del Proyecto
 
-Ejecutar el programa usando:
+El proyecto puede ser probado de dos maneras:
+
+### 1. Pruebas Automatizadas
+
+Ejecutar la suite de pruebas automatizadas:
+```bash
+java -cp bin com.example.cryptography.EjecutorPruebas
+```
+
+La suite de pruebas:
+- Crea un archivo de prueba automáticamente
+- Prueba todas las operaciones en secuencia:
+  1. Encriptación (clave = 3)
+  2. Desencriptación (clave = 3)
+  3. Fuerza Bruta
+  4. Análisis Criptográfico
+- Muestra los resultados de cada operación
+- Guarda los resultados en test_output.txt
+
+### 2. Interfaz Gráfica
+
+Ejecutar la interfaz gráfica:
 ```bash
 java -cp bin com.example.cryptography.Principal
 ```
 
-### Opciones Disponibles
+La interfaz gráfica permite:
+- Seleccionar archivos mediante un diálogo de archivos
+- Ver una vista previa del contenido (5 líneas)
+- Ingresar la clave de encriptación
+- Realizar todas las operaciones con botones
+- Ver los resultados inmediatamente
 
-1. **Encriptar un Archivo** (Opción 1)
-   - Ingresar la ruta del archivo de entrada
-   - Ingresar la ruta del archivo de salida
-   - Ingresar una clave de encriptación (1-255)
+### 3. Modo Consola
 
-2. **Desencriptar un Archivo** (Opción 2)
-   - Ingresar la ruta del archivo encriptado
-   - Ingresar la ruta del archivo de salida
-   - Ingresar la misma clave usada para encriptación
+Ejecutar en modo consola con argumentos:
+```bash
+java -cp bin com.example.cryptography.Principal 1  # Para encriptar
+java -cp bin com.example.cryptography.Principal 2  # Para desencriptar
+java -cp bin com.example.cryptography.Principal 3  # Para fuerza bruta
+java -cp bin com.example.cryptography.Principal 4  # Para análisis
+```
 
-3. **Desencriptación por Fuerza Bruta** (Opción 3)
-   - Ingresar la ruta del archivo encriptado
-   - Ingresar la ruta del archivo de salida
-   - El programa probará todas las claves posibles hasta encontrar texto legible
+## Verificación de Resultados
 
-4. **Análisis Criptográfico** (Opción 4)
-   - Ingresar la ruta del archivo encriptado
-   - Ingresar la ruta del archivo de salida
-   - El programa analizará las frecuencias de caracteres para determinar la clave
+Para verificar que el programa funciona correctamente:
 
-### Ejemplos de Uso
+1. **Encriptación**:
+   - El texto encriptado debe ser diferente al original
+   - Todos los caracteres deben mantenerse en el rango ASCII válido
 
-1. **Encriptar un archivo**:
-   ```bash
-   java -cp bin com.example.cryptography.Principal 1
-   # Ingresar archivo de entrada: texto_entrada.txt
-   # Ingresar archivo de salida: encriptado.txt
-   # Ingresar clave: 3
-   ```
+2. **Desencriptación**:
+   - El texto desencriptado debe ser idéntico al original
+   - La clave debe ser la misma usada para encriptar
 
-2. **Desencriptar un archivo**:
-   ```bash
-   java -cp bin com.example.cryptography.Principal 2
-   # Ingresar archivo de entrada: encriptado.txt
-   # Ingresar archivo de salida: desencriptado.txt
-   # Ingresar clave: 3
-   ```
-
-3. **Desencriptación por Fuerza Bruta**:
-   ```bash
-   java -cp bin com.example.cryptography.Principal 3
-   # Ingresar archivo de entrada: encriptado.txt
-   # Ingresar archivo de salida: resultado_fuerzabruta.txt
-   ```
+3. **Fuerza Bruta**:
+   - Debe encontrar la clave correcta automáticamente
+   - El texto resultante debe ser legible
 
 4. **Análisis Criptográfico**:
-   ```bash
-   java -cp bin com.example.cryptography.Principal 4
-   # Ingresar archivo de entrada: encriptado.txt
-   # Ingresar archivo de salida: resultado_analisis.txt
-   ```
-
-## Formato de Archivo
-
-- El programa trabaja con archivos de texto (.txt)
-- Los archivos de entrada deben contener texto legible
-- Los caracteres especiales y caracteres no ASCII pueden no ser manejados correctamente
+   - Debe identificar la clave mediante análisis de frecuencia
+   - El texto resultante debe ser legible
 
 ## Limitaciones
 
@@ -128,13 +133,6 @@ java -cp bin com.example.cryptography.Principal
 - El análisis criptográfico funciona mejor con textos más largos
 - La detección de idioma está optimizada para textos en español e inglés
 - El valor máximo de la clave de encriptación es 255
-
-## Pruebas
-
-El proyecto incluye una clase EjecutorPruebas que puede usarse para verificar la funcionalidad:
-```bash
-java -cp bin com.example.cryptography.EjecutorPruebas
-```
 
 ## Contribuir
 
